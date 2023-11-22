@@ -10,4 +10,46 @@ cask 'umts-rbenv' do
   stage_only true
 
   depends_on formula: 'rbenv'
+
+  postflight do
+    next if Utils.rbenv_is_function?
+
+    File.open(Utils.rcfile, 'w+') do |f|
+      f.puts %Q|eval "$(rbenv init - #{Utils.shell})"|
+    end
+  end
+
+  module Utils
+    require 'etc'
+    require 'pathname'
+
+    module_function
+
+    def home
+      Pathname(ENV['HOME'])
+    end
+
+    def rbenv_is_function?
+      case shell
+      when 'zsh'
+        /^rbenv: function$/.match? `zsh -l -c 'whence -w rbenv'`
+      when 'bash'
+        /^function$/.match? `bash -l -c 'type -t rbenv'`
+      else
+        false
+      end
+    end
+
+    def rcfile
+      case shell
+      when 'zsh' then home.join('.zshrc')
+      when 'bash' then home.join('.bash_profile')
+      else '/dev/null'
+      end
+    end
+
+    def shell
+      Etc.getpwuid.shell.split('/').last
+    end
+  end
 end
