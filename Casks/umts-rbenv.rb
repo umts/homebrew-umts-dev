@@ -13,7 +13,7 @@ cask 'umts-rbenv' do
 
   postflight do
     unless Utils.rbenv_is_function?
-      File.open(Utils.rcfile, 'w+') do |f|
+      File.open(Utils.rcfile, 'a') do |f|
         f.puts %Q|eval "$(rbenv init - #{Utils.shell})"|
       end
     end
