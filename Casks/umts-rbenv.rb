@@ -19,13 +19,13 @@ cask 'umts-rbenv' do
     end
 
     version = Utils.ruby_version
-    rbenv "install  --skip-existing' #{version}"
+    Utils.rbenv "install  --skip-existing #{version}"
 
     global_file = Utils.home.join '.rbenv', 'version'
     global_file.dirname.mkdir unless global_file.dirname.exist?
     global_file.write "#{version}\n" unless global_file.exist?
 
-    rbenv 'rehash'
+    Utils.rbenv 'rehash'
   end
 
   module Utils
