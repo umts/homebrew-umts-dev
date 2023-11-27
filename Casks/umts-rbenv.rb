@@ -19,11 +19,13 @@ cask 'umts-rbenv' do
     end
 
     version = Utils.ruby_version
-    system 'rbenv', 'install', '--skip-existing', version
+    rbenv "install  --skip-existing' #{version}"
 
     global_file = Utils.home.join '.rbenv', 'version'
     global_file.dirname.mkdir unless global_file.dirname.exist?
     global_file.write "#{version}\n" unless global_file.exist?
+
+    rbenv 'rehash'
   end
 
   module Utils
@@ -35,6 +37,10 @@ cask 'umts-rbenv' do
 
     def home
       Pathname(ENV['HOME'])
+    end
+
+    def rbenv(command)
+      `sh -l -c 'rbenv #{command}'`
     end
 
     def rbenv_is_function?
@@ -57,7 +63,7 @@ cask 'umts-rbenv' do
     end
 
     def ruby_version
-      versions = `sh -l -c 'rbenv install --list'`.split.select { |v| /^[0-9.]+$/.match? v }
+      versions = rbenv('install --list').split.select { |v| /^[0-9.]+$/.match? v }
       versions.max_by { |v| Gem::Version.new(v) }
     end
 
