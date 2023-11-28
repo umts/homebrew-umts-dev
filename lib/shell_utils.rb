@@ -3,7 +3,7 @@ require 'pathname'
 
 module ShellUtils
   def home
-    Pathname(ENV['HOME'])
+    @home ||= Pathname(ENV['HOME'])
   end
 
   def rcfile
@@ -15,6 +15,6 @@ module ShellUtils
   end
 
   def shell
-    Etc.getpwuid.shell.split('/').last
+    @shell ||= Etc.getpwuid.shell.split('/').last
   end
 end
