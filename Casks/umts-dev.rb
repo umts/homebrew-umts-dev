@@ -10,6 +10,10 @@ cask 'umts-dev' do
 
   stage_only true
 
-  depends_on cask: 'umts-nodenv'
-  depends_on cask: 'umts-rbenv'
+  depends_on formula: 'nodenv'
+  depends_on formula: 'rbenv'
+
+  postflight do
+    system 'brew', 'umts-dev-setup'
+  end
 end
