@@ -7,8 +7,8 @@ class RbenvSetup
   def setup!
     setup_shell!
     install_ruby!
-    update_gems!
     global_version!
+    update_gems!
   end
 
   private
