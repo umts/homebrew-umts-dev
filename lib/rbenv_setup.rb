@@ -7,6 +7,7 @@ class RbenvSetup
   def setup!
     setup_shell!
     install_ruby!
+    update_gems!
     global_version!
   end
 
@@ -51,5 +52,9 @@ class RbenvSetup
         f.puts %Q|eval "$(rbenv init - #{shell})"|
       end
     end
+  end
+
+  def update_gems!
+    system %Q|sh -l -c 'eval "$(rbenv init -)" && gem update --silent --system'|
   end
 end
