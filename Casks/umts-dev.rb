@@ -14,6 +14,8 @@ cask 'umts-dev' do
   depends_on formula: 'rbenv'
 
   postflight do
-    system 'brew', 'umts-dev-setup'
+    with_homebrew_path do
+      safe_system 'brew', 'umts-dev-setup'
+    end
   end
 end
