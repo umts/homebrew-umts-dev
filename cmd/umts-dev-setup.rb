@@ -6,6 +6,7 @@
 
 require_relative '../lib/nodenv_setup'
 require_relative '../lib/rbenv_setup'
+require_relative '../lib/brew_path_setup'
 
 module Homebrew
   module_function
@@ -13,6 +14,7 @@ module Homebrew
   def umts_dev_setup
     setup_nodenv
     setup_rbenv
+    setup_brew_path
     puts "\e[92mYou will need to restart your shell for some changes to take effect.\e[0m"
   end
 
@@ -22,5 +24,9 @@ module Homebrew
 
   def setup_rbenv
     RbenvSetup.new.setup!
+  end
+
+  def setup_brew_path
+    BrewPathSetup.setup!
   end
 end
