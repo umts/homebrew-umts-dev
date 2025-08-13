@@ -11,7 +11,7 @@ class BrewPathSetup
 
   private
 
-  def brew_is_a_function?
+  def brew_is_in_path?
     case shell
     when 'zsh'
       /^brew: command$/.match? `zsh -i -c 'whence -w brew'`
@@ -23,10 +23,10 @@ class BrewPathSetup
   end
 
   def setup_shell!
-    return if brew_is_a_function?
+    return if brew_is_in_path?
 
     rcfile.open('a') do |f|
-      f.puts 'eval "$(brew shellenv)"'
+      f.puts %|eval "$(#{`brew --prefix`}/bin/brew shellenv)"|
     end
   end
 end
