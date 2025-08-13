@@ -14,9 +14,9 @@ class BrewPathSetup
   def brew_is_a_function?
     case shell
     when 'zsh'
-      /^brew: function$/.match? `zsh -i -c 'whence -w brew'`
+      /^brew: command$/.match? `zsh -i -c 'whence -w brew'`
     when 'bash'
-      /^function$/.match? `bash -l -c 'type -t brew'`
+      /^file$/.match? `bash -l -c 'type -t brew'`
     else
       false
     end
