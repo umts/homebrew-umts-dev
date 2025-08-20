@@ -12,9 +12,9 @@ module Homebrew
   module_function
 
   def umts_dev_setup
+    setup_brew_path
     setup_nodenv
     setup_rbenv
-    setup_brew_path
     puts "\e[92mYou will need to restart your shell for some changes to take effect.\e[0m"
   end
 
