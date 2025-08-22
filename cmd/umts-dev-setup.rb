@@ -27,6 +27,6 @@ module Homebrew
   end
 
   def setup_brew_path
-    BrewPathSetup.setup!
+    BrewPathSetup.new.setup!
   end
 end

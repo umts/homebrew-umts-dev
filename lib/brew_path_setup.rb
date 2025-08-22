@@ -5,7 +5,7 @@ require_relative 'shell_utils'
 class BrewPathSetup
   include ShellUtils
 
-  def self.setup!
+  def setup!
     setup_shell!
   end
 
