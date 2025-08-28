@@ -32,7 +32,7 @@ class RbenvSetup
   end
 
   def rbenv(command)
-    `sh -l -c 'rbenv #{command}'`
+    `#{shell} -i -c 'rbenv #{command}'`
   end
 
   def rbenv_is_a_function?
@@ -55,6 +55,6 @@ class RbenvSetup
   end
 
   def update_gems!
-    system %Q|sh -l -c 'eval "$(rbenv init -)" && gem update --silent --system'|
+    rbenv 'exec gem update --silent --system'
   end
 end
