@@ -10,7 +10,6 @@ module ShellUtils
     case shell
     when 'zsh' then home.join('.zshrc')
     when 'bash' then home.join('.bash_profile')
-    else Pathname(File::NULL)
     end
   end
 

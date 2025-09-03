@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
 require 'rubygems'
+require 'utils/output'
 require_relative 'shell_utils'
 
 class RbenvSetup
+  include Utils::Output::Mixin
   include ShellUtils
 
   def setup!
@@ -18,6 +22,10 @@ class RbenvSetup
       gf.dirname.mkdir unless gf.dirname.exist?
       gf.write "#{ruby_version}\n" unless gf.exist?
     end
+  end
+
+  def init_string
+    %|eval "$(rbenv init - #{shell})"|
   end
 
   def install_ruby!
@@ -47,10 +55,19 @@ class RbenvSetup
   end
 
   def setup_shell!
-    unless rbenv_is_a_function?
-      rcfile.open('a') do |f|
-        f.puts %Q|eval "$(rbenv init - #{shell})"|
-      end
+    return if rbenv_is_a_function?
+
+    rcfile.then do |rc|
+      opoo <<~MSG and return unless rc
+        Don't know how to set up rbenv for your shell (#{shell}).
+        You'll need to do it yourself.
+
+        Add the following line to your shell's startup:
+
+        #{init_string}
+      MSG
+
+      rc.open('a') { |f| f.puts init_string }
     end
   end
 
