@@ -34,7 +34,7 @@ class RbenvSetup
   end
 
   def ruby_version
-    @ruby_version ||= rbenv('install --list').split.select { |v| /^[0-9.]+$/.match? v }.max_by do |v|
+    @ruby_version ||= rbenv('install --list').split.grep(/^[0-9.]+$/).max_by do |v|
       Gem::Version.new(v)
     end
   end

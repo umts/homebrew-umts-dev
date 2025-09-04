@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'etc'
 require 'pathname'
 
 module ShellUtils
   def home
-    @home ||= Pathname(ENV['HOME'])
+    @home ||= Pathname(Dir.home)
   end
 
   def rcfile

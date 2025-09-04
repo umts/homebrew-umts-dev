@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
+# rubocop:disable Layout/LeadingCommentSpace
 #: Sets up the developer tools installed by the `umts-dev` formula.
 #:
 #: This command takes care of setting up your shell with Rbenv and Nodenv
 #: integration as well as installing a modern version of Ruby and setting
 #: that version as a default.
+# rubocop:enable Layout/LeadingCommentSpace
 
 require_relative '../lib/nodenv_setup'
 require_relative '../lib/rbenv_setup'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 cask 'umts-dev' do
   version '0.0.1'
 
