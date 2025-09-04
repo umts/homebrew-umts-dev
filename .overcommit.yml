@@ -1,0 +1,10 @@
+PreCommit:
+  ForbiddenBranches:
+    enabled: true
+    branch_patterns: ["master", "main"]
+  RuboCop:
+    enabled: true
+    command: ['bundle', 'exec', 'rubocop']
+CommitMsg:
+  ALL:
+    enabled: false
