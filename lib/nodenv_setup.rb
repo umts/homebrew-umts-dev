@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'shell_utils'
 
 class NodenvSetup
@@ -21,10 +23,10 @@ class NodenvSetup
   end
 
   def setup_shell!
-    unless nodenv_is_a_function?
-      rcfile.open('a') do |f|
-        f.puts 'eval "$(nodenv init -)"'
-      end
+    return if nodenv_is_a_function?
+
+    rcfile.open('a') do |f|
+      f.puts 'eval "$(nodenv init -)"'
     end
   end
 end
