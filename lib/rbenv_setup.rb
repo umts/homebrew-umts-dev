@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rubygems'
 require_relative 'shell_utils'
 
@@ -26,7 +28,7 @@ class RbenvSetup
   end
 
   def ruby_version
-    @ruby_version ||= rbenv('install --list').split.select { |v| /^[0-9.]+$/.match? v }.max_by do |v|
+    @ruby_version ||= rbenv('install --list').split.grep(/^[0-9.]+$/).max_by do |v|
       Gem::Version.new(v)
     end
   end
@@ -47,10 +49,10 @@ class RbenvSetup
   end
 
   def setup_shell!
-    unless rbenv_is_a_function?
-      rcfile.open('a') do |f|
-        f.puts %Q|eval "$(rbenv init - #{shell})"|
-      end
+    return if rbenv_is_a_function?
+
+    rcfile.open('a') do |f|
+      f.puts %|eval "$(rbenv init - #{shell})"|
     end
   end
 
