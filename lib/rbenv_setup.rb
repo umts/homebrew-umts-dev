@@ -34,8 +34,8 @@ class RbenvSetup
   end
 
   def rbenv(command)
-    path = "#{HOMEBREW_PREFIX.to_s.chomp}/bin:#{ENV['PATH']}"
-    IO.popen({'PATH' => path}, "#{shell} -i -c 'rbenv #{command}'") do |io|
+    paths = ENV.fetch('PATH', '').split(':').unshift(HOMEBREW_PREFIX.join('bin').to_s).uniq
+    IO.popen({ 'PATH' => paths.join(':') }, "#{shell} -i -c 'rbenv #{command}'") do |io|
       io.read.strip
     end
   end
