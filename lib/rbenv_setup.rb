@@ -40,7 +40,10 @@ class RbenvSetup
   end
 
   def rbenv(command)
-    `#{shell} -i -c 'rbenv #{command}'`
+    paths = ENV.fetch('PATH', '').split(':').unshift(HOMEBREW_PREFIX.join('bin').to_s).uniq
+    IO.popen({ 'PATH' => paths.join(':') }, "#{shell} -i -c 'rbenv #{command}'") do |io|
+      io.read.strip
+    end
   end
 
   def rbenv_is_a_function?
