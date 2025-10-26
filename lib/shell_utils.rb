@@ -9,11 +9,11 @@ module ShellUtils
   end
 
   def rcfile
-    case shell
-    when 'zsh' then home.join('.zshrc')
-    when 'bash' then home.join('.bash_profile')
-    else File::NULL
-    end
+    @rcfile ||= case shell
+                when 'zsh' then home.join('.zshrc')
+                when 'bash' then home.join('.bash_profile')
+                else File::NULL
+                end
   end
 
   def shell
