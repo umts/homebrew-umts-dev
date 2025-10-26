@@ -16,21 +16,9 @@ module Homebrew
   module_function
 
   def umts_dev_setup
-    setup_brew_path
-    setup_nodenv
-    setup_rbenv
+    BrewPathSetup.setup!
+    NodenvSetup.setup!
+    RbenvSetup.setup!
     puts "\e[92mYou will need to restart your shell for some changes to take effect.\e[0m"
-  end
-
-  def setup_nodenv
-    NodenvSetup.new.setup!
-  end
-
-  def setup_rbenv
-    RbenvSetup.new.setup!
-  end
-
-  def setup_brew_path
-    BrewPathSetup.new.setup!
   end
 end
