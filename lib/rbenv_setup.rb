@@ -54,9 +54,7 @@ class RbenvSetup
   def setup_shell!
     return if rbenv_is_a_function?
 
-    rcfile.open('a') do |f|
-      f.puts %|eval "$(rbenv init - #{shell})"|
-    end
+    append_to_rcfile %|eval "$(rbenv init - #{shell})"|
   end
 
   def update_gems!

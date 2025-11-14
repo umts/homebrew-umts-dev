@@ -25,8 +25,6 @@ class NodenvSetup
   def setup_shell!
     return if nodenv_is_a_function?
 
-    rcfile.open('a') do |f|
-      f.puts 'eval "$(nodenv init -)"'
-    end
+    append_to_rcfile 'eval "$(nodenv init -)"'
   end
 end

@@ -25,8 +25,6 @@ class BrewPathSetup
   def setup_shell!
     return if brew_is_in_path?
 
-    rcfile.open('a') do |f|
-      f.puts %|eval "$(#{HOMEBREW_PREFIX.to_s.chomp}/bin/brew shellenv)"|
-    end
+    append_to_rcfile %|eval "$(#{HOMEBREW_PREFIX.to_s.chomp}/bin/brew shellenv)"|
   end
 end
