@@ -14,6 +14,7 @@ cask 'umts-dev' do
 
   depends_on formula: 'imagemagick' # option for active storage image processing
   depends_on formula: 'libyaml' # needed for ruby builds
+  depends_on formula: 'mysql'
   depends_on formula: 'nodenv'
   depends_on formula: 'openssl' # needed for ruby builds
   depends_on formula: 'rbenv'
