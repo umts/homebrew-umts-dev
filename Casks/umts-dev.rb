@@ -12,8 +12,13 @@ cask 'umts-dev' do
 
   stage_only true
 
+  depends_on formula: 'imagemagick' # option for active storage image processing
+  depends_on formula: 'libyaml' # needed for ruby builds
   depends_on formula: 'nodenv'
+  depends_on formula: 'openssl' # needed for ruby builds
   depends_on formula: 'rbenv'
+  depends_on formula: 'readline' # needed for ruby builds
+  depends_on formula: 'vips' # option for active storage image processing
 
   postflight do
     with_homebrew_path do
