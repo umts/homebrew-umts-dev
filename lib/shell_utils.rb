@@ -9,7 +9,9 @@ module ShellUtils
 
   def append_to_rcfile(line)
     rcfile.then do |rc|
-      opoo <<~MSG and next unless rc
+      rc.open('a') { |f| f.puts line } and next if rc
+
+      opoo <<~MSG
         Don't know how to set up your shell (#{shell}).
         You'll need to do it yourself.
 
@@ -17,8 +19,6 @@ module ShellUtils
 
         #{line}
       MSG
-
-      rc.open('a') { |f| f.puts line }
     end
   end
 
